@@ -1,21 +1,47 @@
-document.addEventListener("DOMContentLoaded", () => {
-    fetch('/api/dashboard')
-      .then(response => response.json())
-      .then(data => {
-        // Populate dashboard with data
-        document.getElementById('user-name').innerText = data.name;
-        document.getElementById('topics-count').innerText = data.topicsCount;
-        document.getElementById('reports-count').innerText = data.reportsCount;
-        document.getElementById('trends-count').innerText = data.trendsCount;
-  
-        // Populate recent activities
-        const activityLog = document.getElementById('activity-log');
-        data.activities.forEach(activity => {
-          const listItem = document.createElement('li');
-          listItem.innerText = activity;
-          activityLog.appendChild(listItem);
-        });
-      })
-      .catch(error => console.error('Error fetching dashboard data:', error));
-  });
-  
+// dashboard.js
+
+document.getElementById("search-button").addEventListener("click", () => {
+  const topic = document.getElementById("search-bar").value.trim();
+  const year = document.getElementById("year-filter").value.trim();
+  const field = document.getElementById("field-filter").value.trim();
+  const region = document.getElementById("region-filter").value.trim();
+
+  if (!topic) {
+    alert("Please enter a research topic or keyword.");
+    return;
+  }
+
+  const searchParams = {
+    topic,
+    year,
+    field,
+    region,
+  };
+
+  // Send search parameters to the backend
+  fetch("/api/search", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(searchParams),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.activity) {
+        alert("Search logged successfully.");
+        updateRecentActivities(data.activity);
+      } else {
+        alert("Search failed. Please try again.");
+      }
+    })
+    .catch((error) => console.error("Error:", error));
+});
+
+// Update recent activities dynamically
+function updateRecentActivities(activity) {
+  const activityLog = document.getElementById("activity-log");
+  const newActivity = document.createElement("li");
+  newActivity.textContent = activity;
+  activityLog.appendChild(newActivity);
+}
