@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MetaMagnetAI - Meta-Analysis</title>
+  <link rel="stylesheet" href="meta-analysis.css">
+  <script src="meta-analysis.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>MetaMagnetAI: Meta-Analysis Tool</h1>
+  </header>
+  <main>
+    <!-- Input Section -->
+    <section class="input-section">
+      <h2>Input Parameters</h2>
+      <form id="meta-analysis-form">
+        <label for="search-topics">Search Topics:</label>
+        <input type="text" id="search-topics" name="searchTopics" placeholder="Enter keywords" required>
+        
+        <label for="study-types">Select Study Types:</label>
+        <select id="study-types" name="studyTypes" multiple>
+          <option value="RCT">Randomized Controlled Trials (RCTs)</option>
+          <option value="Cohort">Cohort Studies</option>
+          <option value="CaseControl">Case-Control Studies</option>
+        </select>
+        
+        <label for="time-span">Define Time Span:</label>
+        <input type="text" id="time-span" name="timeSpan" placeholder="e.g., 2010-2023">
+        
+        <label for="journals">Preferred Journals:</label>
+        <input type="text" id="journals" name="journals" placeholder="e.g., Nature, JAMA">
+
+        <label for="file-upload">Upload External Datasets or Papers:</label>
+        <input type="file" id="file-upload" name="fileUpload" accept=".csv,.xlsx,.txt,.pdf">
+        
+        <button type="submit">Start Analysis</button>
+      </form>
+    </section>
+
+    <!-- Progress Indicator -->
+    <section class="progress-section">
+      <h2>Analysis Progress</h2>
+      <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section">
+      <h2>Results</h2>
+      <div id="graphical-output" class="graphical-output"></div>
+      <div id="text-summary" class="text-summary"></div>
+      <button id="export-report">Export Report</button>
+    </section>
+  </main>
+</body>
+</html>
