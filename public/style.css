@@ -124,6 +124,74 @@ img {
   color: #666;
 }
 
+/* Pricing Section Styling */
+.pricing-tiers {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.tier {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  margin: 10px;
+}
+
+.tier h3 {
+  font-size: 1.5rem;
+  color: #007BFF;
+}
+
+.tier p {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.tier ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.tier ul li {
+  margin: 10px 0;
+}
+
+button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Contact Section Styling */
+.contact-section form {
+  max-width: 500px;
+  margin: auto;
+  text-align: left;
+}
+
+.contact-section input, .contact-section textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.contact-section button {
+  width: 100%;
+  margin-top: 10px;
+}
+
 /* Responsive Styling */
 @media (max-width: 768px) {
   .hero-section h1 {
