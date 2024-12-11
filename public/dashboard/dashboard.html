@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MetaMagnet AI - Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../script.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <body>
+    <div id="error-message"></div>
+    <header class="dashboard-header">
+      <nav class="navbar">
+        <div class="logo">MetaMagnet AI</div>
+        <ul class="nav-links">
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/analytics">Meta-Analysis</a></li>
+          <li><a href="/trends">Trend Predictions</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="dashboard">
+      <!-- Search Bar Section -->
+      <form onsubmit="findResearchTopics(event)" class="search-bar-section">
+        <h2 class="text-2xl font-meduim mb-4">Search for Research Topics</h2>
+        <div class=""></div>
+        <input
+          type="text"
+          id="search-bar"
+          class="h-[60px] w-[374px]"
+          placeholder="Enter research topic or keywords"
+        />
+        <div class="filters">
+          <label for="year-filter"
+            >Year:
+            <input type="text" id="year-filter" placeholder="e.g., 2015-2023" />
+          </label>
+
+          <label for="field-filter"
+            >Field:
+            <input
+              type="text"
+              id="field-filter"
+              placeholder="e.g., AI, Biology"
+            />
+          </label>
+
+          <label for="region-filter"
+            >Region:
+            <input
+              type="text"
+              id="region-filter"
+              placeholder="e.g., Africa, Europe"
+            />
+          </label>
+        </div>
+        <button id="search-button h-fit ">Search</button>
+      </form>
+
+      <!-- Quick Links Section -->
+      <section class="quick-links my-5">
+        <h2 class="text-xl font-meduim mb-2">Quick Links</h2>
+        <button id="start-meta-analysis">Start Meta-Analysis</button>
+        <button id="explore-trends">Explore Trends</button>
+        <button id="phd-topics">Ph.D. Topics</button>
+      </section>
+
+      <!-- Analytics Overview Section -->
+      <section class="analytics-overview my-5">
+        <h2 class="font-meduim text-lg">Quick Insights</h2>
+        <div class="analytics-cards">
+          <div class="card">
+            <h3>Topics Explored</h3>
+            <p id="topics-count">Loading...</p>
+          </div>
+          <div class="card">
+            <h3>Reports Generated</h3>
+            <p id="reports-count">Loading...</p>
+          </div>
+          <div class="card">
+            <h3>Trend Matches</h3>
+            <p id="trends-count">Loading...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Activities Section -->
+      <section class="recent-activities">
+        <h2>Recent Activities</h2>
+        <ul id="activity-log">
+          <li>No recent activity yet.</li>
+        </ul>
+      </section>
+
+      <!-- Personalized Insights Section -->
+      <section class="personalized-insights">
+        <h2>Personalized Insights</h2>
+        <p id="emerging-fields">
+          Emerging Fields in Your Area of Interest will appear here.
+        </p>
+      </section>
+    </main>
+  </body>
+  <script src="dashboard.js" defer></script>
+</html>
