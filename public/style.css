@@ -124,6 +124,14 @@ img {
   color: #666;
 }
 
+/* General Section Styling */
+.about-section, .pricing-section, .contact-section {
+  padding: 40px;
+  margin: 20px auto;
+  text-align: center;
+  max-width: 1200px;
+}
+
 /* Pricing Section Styling */
 .pricing-tiers {
   display: flex;
