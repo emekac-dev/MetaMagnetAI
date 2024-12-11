@@ -1,6 +1,6 @@
 const path = require("path");
-const catchAsync = require("../utils/catchAsync");
-const AppError = require("../utils/appError");
+const catchAsync = require("./../utils/catchAsync");
+const AppError = require("./../utils/appError");
 
 exports.findResearchTopics = catchAsync(async (req, res, next) => {
   const { topic, year, field, region } = req.body;

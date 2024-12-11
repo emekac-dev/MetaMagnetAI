@@ -1,9 +1,9 @@
 const path = require("path");
-const userData = require("../dev-data/userData.json");
-const catchAsync = require("../utils/catchAsync");
+const userData = require("./../dev-data/userData.json");
+const catchAsync = require("./../utils/catchAsync");
 
 exports.getDashboardVeiw = catchAsync(async (req, res) => {
-  const filePath = path.join(__dirname, "../public/dashboard/dashboard.html");
+  const filePath = path.join(__dirname, "./../public/dashboard/dashboard.html");
   return res.status(200).sendFile(filePath);
 });
 
