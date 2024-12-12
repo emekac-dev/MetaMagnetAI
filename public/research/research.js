@@ -23,7 +23,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     let storedData = JSON.parse(localStorage.getItem("researchData"));
 
-    if (!storedData || storedData.search_parameters.q !== topic) {
+    if (
+      !storedData ||
+      storedData.search_parameters.q !==
+        topic + `${field ? " in " + field : ""}`
+    ) {
       storedData = await findResearchTopicsWithoutForm();
     }
     const resultsContainer = document.getElementById("results-container");
@@ -63,16 +67,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       // Page Links
-      Object.keys(pagination.other_pages).forEach((pageNumber) => {
+      const highestPage = Math.max(
+        ...Object.keys(pagination.other_pages).map(Number)
+      );
+
+      // Generate pagination buttons from 1 to highestPage
+      for (let pageNumber = 1; pageNumber <= highestPage; pageNumber++) {
         paginationContainer.innerHTML += `
-              <button class="px-4 py-2 ${
-                Number(pageNumber) === pagination.current
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-200"
-              } rounded" data-page="${pageNumber}">
-                ${pageNumber}
-              </button>`;
-      });
+          <button class="px-4 py-2 ${
+            pageNumber === pagination.current
+              ? "bg-blue-600 text-white"
+              : "bg-gray-200"
+          } rounded" data-page="${pageNumber}">
+            ${pageNumber}
+          </button>`;
+      }
 
       // Next Button
       if (pagination.next) {
@@ -84,11 +93,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
 
-    function handlePageChange(event) {
+    async function handlePageChange(event) {
       const button = event.target.closest("button");
       if (button && button.dataset.page) {
         const page = Number(button.dataset.page);
-        console.log(`Load page ${page}`); // Replace with actual API call logic
+
+        await findResearchTopicsWithoutForm((page - 1) * 10);
         storedData.pagination.current = page; // Update current page for mock data
         renderPagination(storedData.pagination);
         window.scrollTo({

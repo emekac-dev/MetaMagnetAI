@@ -68,8 +68,17 @@ const findResearchTopics = async (e) => {
     if (!searchBar.value || !searchBar.value.trim()) {
       throw "Topic is required";
     }
-    if (data.year.trim() && !data.year.match(/^\d{4}-\d{4}$/)) {
-      throw "Year format must be YYYY-YYYY.";
+    if (data.year.trim()) {
+      // Ensure the format is correct
+      if (!data.year.match(/^\d{4}-\d{4}$/)) {
+        throw "Year format must be YYYY-YYYY.";
+      }
+
+      // Split the year range and check the values
+      const [startYear, endYear] = data.year.split("-").map(Number);
+      if (endYear < startYear) {
+        throw "End year cannot be less than the start year.";
+      }
     }
     const res = await axios.post("/api/research/search", data);
     localStorage.setItem("researchData", JSON.stringify(res.data));
@@ -83,7 +92,7 @@ const findResearchTopics = async (e) => {
   }
 };
 
-const findResearchTopicsWithoutForm = async () => {
+const findResearchTopicsWithoutForm = async (number = 0) => {
   // Extract values from input fields using their names or IDs
   const searchBar = document.querySelector("#search-bar");
   const yearFilter = document.querySelector("#year-filter");
@@ -96,14 +105,24 @@ const findResearchTopicsWithoutForm = async () => {
     year: yearFilter.value,
     field: fieldFilter.value,
     region: regionFilter.value,
+    start: number,
   };
 
   try {
     if (!searchBar.value || !searchBar.value.trim()) {
       throw "Topic is required";
     }
-    if (data.year.trim() && !data.year.match(/^\d{4}-\d{4}$/)) {
-      throw "Year format must be YYYY-YYYY.";
+    if (data.year.trim()) {
+      // Ensure the format is correct
+      if (!data.year.match(/^\d{4}-\d{4}$/)) {
+        throw "Year format must be YYYY-YYYY.";
+      }
+
+      // Split the year range and check the values
+      const [startYear, endYear] = data.year.split("-").map(Number);
+      if (endYear < startYear) {
+        throw "End year cannot be less than the start year.";
+      }
     }
     const res = await axios.post("/api/research/search", data);
     localStorage.setItem("researchData", JSON.stringify(res.data));

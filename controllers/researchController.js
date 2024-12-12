@@ -4,7 +4,7 @@ const AppError = require("./../utils/appError");
 const axios = require("axios");
 
 exports.findResearchTopics = catchAsync(async (req, res, next) => {
-  const { topic, year, field, region } = req.body;
+  const { topic, year, field, region, start } = req.body;
 
   if (!topic) {
     return next(new AppError("Topic is required.", 400));
@@ -17,11 +17,12 @@ exports.findResearchTopics = catchAsync(async (req, res, next) => {
   // Construct query parameters for SerpApi
   const params = {
     engine: "google_scholar",
-    q: topic,
+    q: topic + `${field ? " in " + field : ""}`,
     as_ylo: year ? year.split("-")[0] : undefined,
     as_yhi: year ? year.split("-")[1] : undefined,
-    hl: region || "en", // Default to English if no region provided
+    hl: "en", // Default to English if no region provided
     api_key: process.env.SERP_API_PRIVATE_KEY, // Store API key in .env
+    start: start || 0,
   };
 
   try {
@@ -30,7 +31,6 @@ exports.findResearchTopics = catchAsync(async (req, res, next) => {
     // Return data to the frontend
     res.status(200).json(response.data);
   } catch (error) {
-    console.error("Error fetching from SerpApi:", error);
     return next(new AppError("Failed to fetch research topics.", 500));
   }
 });
