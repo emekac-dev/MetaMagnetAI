@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const viewRouter = require("./routes/viewRoutes");
 const errorController = require("./controllers/errorController");
 const researchRouter = require("./routes/researchRoutes");
-const dashboardRouter = require("./routes/dashboardRoutes");
+const dashboardRouter = require("./routes/userRoutes");
 
 const app = express();
 let recentActivities = [];

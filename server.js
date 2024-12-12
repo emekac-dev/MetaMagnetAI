@@ -1,7 +1,15 @@
+const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: "./.env" });
 
 const app = require(`./app`);
+const DB = process.env.DATABASE;
+
+mongoose.set("strictQuery", true);
+
+mongoose.connect(DB).then((con) => {
+  console.log("Database connection sucessfull");
+});
 
 const port = process.env.PORT || 3000;
 
