@@ -45,3 +45,75 @@ function extractErrorMessage(error) {
     return "An unknown error occurred. Please try again."; // Default fallback message
   }
 }
+
+const findResearchTopics = async (e) => {
+  e.preventDefault();
+  const form = e.target;
+
+  // Extract values from input fields using their names or IDs
+  const searchBar = form.querySelector("#search-bar");
+  const yearFilter = form.querySelector("#year-filter");
+  const fieldFilter = form.querySelector("#field-filter");
+  const regionFilter = form.querySelector("#region-filter");
+
+  // Prepare data
+  const data = {
+    topic: searchBar.value,
+    year: yearFilter.value,
+    field: fieldFilter.value,
+    region: regionFilter.value,
+  };
+
+  try {
+    if (!searchBar.value || !searchBar.value.trim()) {
+      throw "Topic is required";
+    }
+    if (data.year.trim() && !data.year.match(/^\d{4}-\d{4}$/)) {
+      throw "Year format must be YYYY-YYYY.";
+    }
+    const res = await axios.post("/api/research/search", data);
+    localStorage.setItem("researchData", JSON.stringify(res.data));
+    location.href = `/research?t=${encodeURIComponent(
+      searchBar.value
+    )}&y=${encodeURIComponent(yearFilter.value)}&f=${encodeURIComponent(
+      fieldFilter.value
+    )}&r=${encodeURIComponent(regionFilter.value)}`;
+  } catch (error) {
+    showErrorMessageWithTimeout("error-message", extractErrorMessage(error), 5);
+  }
+};
+
+const findResearchTopicsWithoutForm = async () => {
+  // Extract values from input fields using their names or IDs
+  const searchBar = document.querySelector("#search-bar");
+  const yearFilter = document.querySelector("#year-filter");
+  const fieldFilter = document.querySelector("#field-filter");
+  const regionFilter = document.querySelector("#region-filter");
+
+  // Prepare data
+  const data = {
+    topic: searchBar.value,
+    year: yearFilter.value,
+    field: fieldFilter.value,
+    region: regionFilter.value,
+  };
+
+  try {
+    if (!searchBar.value || !searchBar.value.trim()) {
+      throw "Topic is required";
+    }
+    if (data.year.trim() && !data.year.match(/^\d{4}-\d{4}$/)) {
+      throw "Year format must be YYYY-YYYY.";
+    }
+    const res = await axios.post("/api/research/search", data);
+    localStorage.setItem("researchData", JSON.stringify(res.data));
+    location.href = `/research?t=${encodeURIComponent(
+      searchBar.value
+    )}&y=${encodeURIComponent(yearFilter.value)}&f=${encodeURIComponent(
+      fieldFilter.value
+    )}&r=${encodeURIComponent(regionFilter.value)}`;
+    return res.data;
+  } catch (error) {
+    showErrorMessageWithTimeout("error-message", extractErrorMessage(error), 5);
+  }
+};
