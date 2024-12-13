@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MetaMagnet AI</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -21,7 +23,11 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
         <!--<button class="login-btn" onclick="location.href='/login'">Login/Sign Up</button>-->
-        <button class="login-btn" onclick="location.href='login.html'">
+        <button
+          class="login-btn"
+          id="login-btn"
+          onclick="location.href='/login'"
+        >
           Login/Sign Up
         </button>
       </nav>
@@ -181,4 +187,5 @@
       <a href="mailto:support@metamagnet.ai">support@metamagnet.ai</a>
     </p>
   </section>
+  <script src="index.js" defer></script>
 </html>

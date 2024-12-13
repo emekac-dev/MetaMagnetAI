@@ -5,7 +5,11 @@
  * @param {number} timeout - Time in milliseconds before the error message is hidden.
  */
 
-function showErrorMessageWithTimeout(elementId, message, timeout = 5) {
+function showErrorMessageWithTimeout(
+  elementId = "error-message",
+  message,
+  timeout = 5
+) {
   const errorElement = document.getElementById(elementId);
 
   let className =

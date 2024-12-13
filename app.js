@@ -1,42 +1,52 @@
 const path = require("path");
 const express = require("express");
+const morgan = require("morgan");
 const multer = require("multer");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
+const hpp = require("hpp");
+const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const viewRouter = require("./routes/viewRoutes");
 const errorController = require("./controllers/errorController");
 const researchRouter = require("./routes/researchRoutes");
-const dashboardRouter = require("./routes/userRoutes");
+const userRouter = require("./routes/userRoutes");
+const authRouter = require("./routes/authRoutes");
 
 const app = express();
 let recentActivities = [];
 let insights = "No data yet.";
 
 // Middleware
+if (process.env.NODE_ENV == "development") app.use(morgan("dev"));
+
+//cookie parser
+app.use(cookieParser());
+
+// data sanitization against no-sql query injection
+app.use(mongoSanitize());
+
+// data sanitization against xss
+app.use(xss());
+
+//preventing parameter pollution
+app.use(hpp({ whitelist: [] }));
+
 app.use(express.static(path.join(__dirname, "public"))); // Serve static files
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // API routes
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  // console.log(req.cookies);
+  next();
+});
+
 app.use("/", viewRouter); //For all the future views
 app.use("/api/research", researchRouter);
-app.use("/api/dashboard", dashboardRouter);
-
-// Serve login page
-app.get("/login", (req, res) => {
-  res.sendFile(__dirname + "/public/login.html");
-});
-
-// Handle login form submission
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-
-  // Mock user authentication
-  if (email === "test@example.com" && password === "password123") {
-    res.redirect("/dashboard");
-  } else {
-    res.send("Invalid email or password. Please try again.");
-  }
-});
+app.use("/api/dashboard", userRouter);
+app.use("/api/auth", authRouter);
 
 // File upload configuration
 const upload = multer({ dest: "uploads/" });
