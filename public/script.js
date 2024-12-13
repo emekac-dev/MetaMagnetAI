@@ -5,7 +5,11 @@
  * @param {number} timeout - Time in milliseconds before the error message is hidden.
  */
 
-function showErrorMessageWithTimeout(elementId, message, timeout = 5) {
+function showErrorMessageWithTimeout(
+  elementId = "error-message",
+  message,
+  timeout = 5
+) {
   const errorElement = document.getElementById(elementId);
 
   let className =
@@ -45,3 +49,94 @@ function extractErrorMessage(error) {
     return "An unknown error occurred. Please try again."; // Default fallback message
   }
 }
+
+const findResearchTopics = async (e) => {
+  e.preventDefault();
+  const form = e.target;
+
+  // Extract values from input fields using their names or IDs
+  const searchBar = form.querySelector("#search-bar");
+  const yearFilter = form.querySelector("#year-filter");
+  const fieldFilter = form.querySelector("#field-filter");
+  const regionFilter = form.querySelector("#region-filter");
+
+  // Prepare data
+  const data = {
+    topic: searchBar.value,
+    year: yearFilter.value,
+    field: fieldFilter.value,
+    region: regionFilter.value,
+  };
+
+  try {
+    if (!searchBar.value || !searchBar.value.trim()) {
+      throw "Topic is required";
+    }
+    if (data.year.trim()) {
+      // Ensure the format is correct
+      if (!data.year.match(/^\d{4}-\d{4}$/)) {
+        throw "Year format must be YYYY-YYYY.";
+      }
+
+      // Split the year range and check the values
+      const [startYear, endYear] = data.year.split("-").map(Number);
+      if (endYear < startYear) {
+        throw "End year cannot be less than the start year.";
+      }
+    }
+    const res = await axios.post("/api/research/search", data);
+    localStorage.setItem("researchData", JSON.stringify(res.data));
+    location.href = `/research?t=${encodeURIComponent(
+      searchBar.value
+    )}&y=${encodeURIComponent(yearFilter.value)}&f=${encodeURIComponent(
+      fieldFilter.value
+    )}&r=${encodeURIComponent(regionFilter.value)}`;
+  } catch (error) {
+    showErrorMessageWithTimeout("error-message", extractErrorMessage(error), 5);
+  }
+};
+
+const findResearchTopicsWithoutForm = async (number = 0) => {
+  // Extract values from input fields using their names or IDs
+  const searchBar = document.querySelector("#search-bar");
+  const yearFilter = document.querySelector("#year-filter");
+  const fieldFilter = document.querySelector("#field-filter");
+  const regionFilter = document.querySelector("#region-filter");
+
+  // Prepare data
+  const data = {
+    topic: searchBar.value,
+    year: yearFilter.value,
+    field: fieldFilter.value,
+    region: regionFilter.value,
+    start: number,
+  };
+
+  try {
+    if (!searchBar.value || !searchBar.value.trim()) {
+      throw "Topic is required";
+    }
+    if (data.year.trim()) {
+      // Ensure the format is correct
+      if (!data.year.match(/^\d{4}-\d{4}$/)) {
+        throw "Year format must be YYYY-YYYY.";
+      }
+
+      // Split the year range and check the values
+      const [startYear, endYear] = data.year.split("-").map(Number);
+      if (endYear < startYear) {
+        throw "End year cannot be less than the start year.";
+      }
+    }
+    const res = await axios.post("/api/research/search", data);
+    localStorage.setItem("researchData", JSON.stringify(res.data));
+    location.href = `/research?t=${encodeURIComponent(
+      searchBar.value
+    )}&y=${encodeURIComponent(yearFilter.value)}&f=${encodeURIComponent(
+      fieldFilter.value
+    )}&r=${encodeURIComponent(regionFilter.value)}`;
+    return res.data;
+  } catch (error) {
+    showErrorMessageWithTimeout("error-message", extractErrorMessage(error), 5);
+  }
+};

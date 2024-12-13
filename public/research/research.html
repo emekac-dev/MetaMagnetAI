@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MetaMagnet AI - Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="./../index.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./../script.js"></script>
@@ -28,7 +28,6 @@
         </ul>
       </nav>
     </header>
-
     <main class="dashboard">
       <!-- Search Bar Section -->
       <form onsubmit="findResearchTopics(event)" class="search-bar-section">
@@ -67,49 +66,10 @@
         <button id="search-button h-fit ">Search</button>
       </form>
 
-      <!-- Quick Links Section -->
-      <section class="quick-links my-5">
-        <h2 class="text-xl font-meduim mb-2">Quick Links</h2>
-        <button id="start-meta-analysis">Start Meta-Analysis</button>
-        <button id="explore-trends">Explore Trends</button>
-        <button id="phd-topics">Ph.D. Topics</button>
-      </section>
+      <div id="results-container" class="grid grid-cols-1 my-5 gap-6"></div>
 
-      <!-- Analytics Overview Section -->
-      <section class="analytics-overview my-5">
-        <h2 class="font-meduim text-lg">Quick Insights</h2>
-        <div class="analytics-cards">
-          <div class="card">
-            <h3>Topics Explored</h3>
-            <p id="topics-count">Loading...</p>
-          </div>
-          <div class="card">
-            <h3>Reports Generated</h3>
-            <p id="reports-count">Loading...</p>
-          </div>
-          <div class="card">
-            <h3>Trend Matches</h3>
-            <p id="trends-count">Loading...</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Recent Activities Section -->
-      <section class="recent-activities">
-        <h2>Recent Activities</h2>
-        <ul id="activity-log">
-          <li>No recent activity yet.</li>
-        </ul>
-      </section>
-
-      <!-- Personalized Insights Section -->
-      <section class="personalized-insights">
-        <h2>Personalized Insights</h2>
-        <p id="emerging-fields">
-          Emerging Fields in Your Area of Interest will appear here.
-        </p>
-      </section>
+      <nav id="pagination" class="mt-6 flex justify-center space-x-4"></nav>
     </main>
   </body>
-  <script src="dashboard.js" defer></script>
+  <script src="./research.js" defer></script>
 </html>

@@ -1,6 +1,6 @@
 /* General Styling */
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -16,13 +16,13 @@ a {
 div.images {
   width: 100%;
   padding: 10px;
- }
+}
 
 img {
   display: block;
   margin: 1rem auto;
   max-width: 100%;
-   position: relative;
+  position: relative;
   height: auto;
 }
 
@@ -142,7 +142,7 @@ img {
 
 .tier h3 {
   font-size: 1.5rem;
-  color: #007BFF;
+  color: #007bff;
 }
 
 .tier p {
@@ -160,7 +160,7 @@ img {
 }
 
 button {
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -179,7 +179,8 @@ button:hover {
   text-align: left;
 }
 
-.contact-section input, .contact-section textarea {
+.contact-section input,
+.contact-section textarea {
   width: 100%;
   padding: 10px;
   margin: 10px 0;

@@ -37,31 +37,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
   }
 });
-
-const findResearchTopics = async (e) => {
-  e.preventDefault();
-  const form = e.target;
-
-  // Extract values from input fields using their names or IDs
-  const searchBar = form.querySelector("#search-bar");
-  const yearFilter = form.querySelector("#year-filter");
-  const fieldFilter = form.querySelector("#field-filter");
-  const regionFilter = form.querySelector("#region-filter");
-
-  // Prepare data
-  const data = {
-    topic: searchBar.value,
-    year: yearFilter.value,
-    field: fieldFilter.value,
-    region: regionFilter.value,
-  };
-
-  try {
-    if (!searchBar.value || !searchBar.value.trim()) {
-      throw "Topic is required";
-    }
-    const res = await axios.post("/api/research/search", data);
-  } catch (error) {
-    showErrorMessageWithTimeout("error-message", extractErrorMessage(error), 5);
-  }
-};

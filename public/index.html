@@ -1,146 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MetaMagnet AI</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MetaMagnet AI</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <body>
+    <!-- Landing Page Section -->
+    <header class="landing-page">
+      <nav class="navbar">
+        <div class="logo">
+          <a href="/" class="cursor-pointer">MetaMagnet AI</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <!--<button class="login-btn" onclick="location.href='/login'">Login/Sign Up</button>-->
+        <button
+          class="login-btn"
+          id="login-btn"
+          onclick="location.href='/login'"
+        >
+          Login/Sign Up
+        </button>
+      </nav>
 
-<body>
-  <!-- Landing Page Section -->
-  <header class="landing-page">
-    <nav class="navbar">
-      <div class="logo">MetaMagnet AI</div>
-      <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-            <!--<button class="login-btn" onclick="location.href='/login'">Login/Sign Up</button>-->
-            <button class="login-btn" onclick="location.href='login.html'">Login/Sign Up</button>
+      <div class="hero-section">
+        <h1>
+          Discover Insights. Predict Trends. Shape the Future of Research.
+        </h1>
+        <p>
+          Your AI-powered tool for literature reviews, meta-analysis, and Ph.D.
+          topic discovery.
+        </p>
+        <button class="cta-btn">
+          <a href="/signup">Start Your Meta-Analysis Now</a>
+        </button>
+      </div>
+    </header>
 
-    </nav>
+    <!-- Features Section -->
+    <section id="features" class="features">
+      <div class="feature-card">
+        <div class="images">
+          <figure>
+            <img
+              src="images/psi-chi-literature-review-webinar-tile_tcm11-304299.jpg"
+              alt="Literature Review Icon"
+              width="500"
+              height="500"
+            />
+          </figure>
+        </div>
 
-    <div class="hero-section">
-      <h1>Discover Insights. Predict Trends. Shape the Future of Research.</h1>
-      <p>Your AI-powered tool for literature reviews, meta-analysis, and Ph.D. topic discovery.</p>
-      <button class="cta-btn">Start Your Meta-Analysis Now</button>
-    </div>
-  </header>
-
-  <!-- Features Section -->
-  <section id="features" class="features">
-    <div class="feature-card">
-      <div class="images">
-        <figure>
-          <img src="images/psi-chi-literature-review-webinar-tile_tcm11-304299.jpg" alt="Literature Review Icon"
-            width="500" height="500" />
-        </figure>
+        <h2>Literature Review</h2>
+        <p>Find and summarize key studies effortlessly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="images">
+          <figure>
+            <img
+              src="images/meta-analysis.webp"
+              alt="Literature Review Icon"
+              width="500"
+              height="500"
+            />
+          </figure>
+        </div>
+        <h2>Meta-Analysis</h2>
+        <p>Combine data for comprehensive insights.</p>
       </div>
 
-      <h2>Literature Review</h2>
-      <p>Find and summarize key studies effortlessly.</p>
-    </div>
-    <div class="feature-card">
-      <div class="images">
-        <figure>
-          <img src="images/meta-analysis.webp" alt="Literature Review Icon"
-            width="500" height="500" />
-        </figure>
+      <div class="feature-card">
+        <div class="images">
+          <figure>
+            <img
+              src="images/a-Trend-analysis-of-annual-publications-b-distribution-of-outcome-prediction.png"
+              alt="Literature Review Icon"
+            />
+          </figure>
+        </div>
+        <h2>Trend Prediction</h2>
+        <p>Identify high-potential research areas.</p>
       </div>
-      <h2>Meta-Analysis</h2>
-      <p>Combine data for comprehensive insights.</p>
-    </div>
+      <div class="feature-card">
+        <div class="images">
+          <figure>
+            <img
+              src="images/PHD.jpg"
+              alt="Literature Review Icon"
+              width="500"
+              height="500"
+            />
+          </figure>
+        </div>
+        <h2>Ph.D. Topics</h2>
+        <p>Receive data-driven topic recommendations.</p>
+      </div>
+    </section>
+  </body>
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <h2>About MetaMagnet AI</h2>
+    <p>
+      MetaMagnet AI is your intelligent partner in research, designed to
+      revolutionize the way you explore, analyze, and create impactful studies.
+      Powered by advanced artificial intelligence, MetaMagnet AI simplifies
+      meta-analysis, identifies emerging trends, and suggests high-potential
+      research topics tailored to your interests. Whether you are a student,
+      researcher, or professional, our platform empowers you to make data-driven
+      decisions, saving time and enhancing the quality of your work.
+    </p>
+  </section>
 
-    <div class="feature-card">
-      <div class="images">
-        <figure>
-          <img src="images/a-Trend-analysis-of-annual-publications-b-distribution-of-outcome-prediction.png" alt="Literature Review Icon" />
-        </figure>
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing-section">
+    <h2>Pricing</h2>
+    <div class="pricing-tiers">
+      <div class="tier">
+        <h3>Basic</h3>
+        <p>Free</p>
+        <ul>
+          <li>Access to basic search features</li>
+          <li>1 Meta-Analysis per month</li>
+          <li>Limited trend insights</li>
+        </ul>
+        <button>Get Started</button>
       </div>
-      <h2>Trend Prediction</h2>
-      <p>Identify high-potential research areas.</p>
-    </div>
-    <div class="feature-card">
-      <div class="images">
-        <figure>
-          <img src="images/PHD.jpg" alt="Literature Review Icon" width="500" height="500" />
-        </figure>
+      <div class="tier">
+        <h3>Pro</h3>
+        <p>$19.99/month</p>
+        <ul>
+          <li>Unlimited searches</li>
+          <li>5 Meta-Analyses per month</li>
+          <li>Detailed trend insights</li>
+          <li>Downloadable reports</li>
+        </ul>
+        <button>Upgrade Now</button>
       </div>
-      <h2>Ph.D. Topics</h2>
-      <p>Receive data-driven topic recommendations.</p>
+      <div class="tier">
+        <h3>Enterprise</h3>
+        <p>Custom Pricing</p>
+        <ul>
+          <li>Unlimited access to all features</li>
+          <li>Dedicated support</li>
+          <li>Custom data integrations</li>
+        </ul>
+        <button>Contact Us</button>
+      </div>
     </div>
   </section>
-</body>
- <!-- About Section -->
-  <section id="about" class="about-section">
-  <h2>About MetaMagnet AI</h2>
-  <p>
-    MetaMagnet AI is your intelligent partner in research, designed to revolutionize the way you explore, analyze, and create impactful studies. 
-    Powered by advanced artificial intelligence, MetaMagnet AI simplifies meta-analysis, identifies emerging trends, and suggests high-potential 
-    research topics tailored to your interests. Whether you are a student, researcher, or professional, our platform empowers you to make data-driven decisions, 
-    saving time and enhancing the quality of your work.
-  </p>
-</section>
 
-   <!-- Pricing Section -->
-  <section id="pricing" class="pricing-section">
-  <h2>Pricing</h2>
-  <div class="pricing-tiers">
-    <div class="tier">
-      <h3>Basic</h3>
-      <p>Free</p>
-      <ul>
-        <li>Access to basic search features</li>
-        <li>1 Meta-Analysis per month</li>
-        <li>Limited trend insights</li>
-      </ul>
-      <button>Get Started</button>
-    </div>
-    <div class="tier">
-      <h3>Pro</h3>
-      <p>$19.99/month</p>
-      <ul>
-        <li>Unlimited searches</li>
-        <li>5 Meta-Analyses per month</li>
-        <li>Detailed trend insights</li>
-        <li>Downloadable reports</li>
-      </ul>
-      <button>Upgrade Now</button>
-    </div>
-    <div class="tier">
-      <h3>Enterprise</h3>
-      <p>Custom Pricing</p>
-      <ul>
-        <li>Unlimited access to all features</li>
-        <li>Dedicated support</li>
-        <li>Custom data integrations</li>
-      </ul>
-      <button>Contact Us</button>
-    </div>
-  </div>
-</section>
-  
- <!-- Contact Section -->
+  <!-- Contact Section -->
   <section id="contact" class="contact-section">
-  <h2>Contact Us</h2>
-  <p>Have questions, need support, or want to partner with us? We're here to help!</p>
-  <form id="contact-form">
-    <label for="name">Name:</label>
-    <input type="text" id="name" placeholder="Your Name" required>
+    <h2>Contact Us</h2>
+    <p>
+      Have questions, need support, or want to partner with us? We're here to
+      help!
+    </p>
+    <form id="contact-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Your Name" required />
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" placeholder="Your Email" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Your Email" required />
 
-    <label for="message">Message:</label>
-    <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+      <label for="message">Message:</label>
+      <textarea
+        id="message"
+        rows="5"
+        placeholder="Your Message"
+        required
+      ></textarea>
 
-    <button type="submit">Send Message</button>
-  </form>
-  <p>Or reach out directly via email at <a href="mailto:support@metamagnet.ai">support@metamagnet.ai</a></p>
-</section>
-
+      <button type="submit">Send Message</button>
+    </form>
+    <p>
+      Or reach out directly via email at
+      <a href="mailto:support@metamagnet.ai">support@metamagnet.ai</a>
+    </p>
+  </section>
+  <script src="index.js" defer></script>
 </html>

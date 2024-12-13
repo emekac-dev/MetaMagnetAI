@@ -1,35 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MetaMagnet AI - Sign Up</title>
-  <link rel="stylesheet" href="signup.css">
-</head>
-<body>
-  <main class="signup-container">
-    <section class="signup-card">
-      <h1>Create Your Account</h1>
-      <p>Sign up to unlock insights and begin your AI-powered journey.</p>
-      <form action="/signup" method="POST">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Create a password" required>
-        
-        <label for="confirm-password">Confirm Password:</label>
-        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
-        
-        <button type="submit" class="signup-btn">Sign Up</button>
-      </form>
-      <p>Already have an account? <a href="/login">Login</a></p>
-      <button class="back-home-btn" onclick="location.href='/'">Back to Home</button>
-      
-    </section>
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MetaMagnet AI - Sign Up</title>
+    <link rel="stylesheet" href="signup.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./../script.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <body class="overview-x-hidden">
+    <div id="error-message"></div>
+    <main class="signup-container">
+      <section class="signup-card">
+        <h1>Create Your Account</h1>
+        <p>Sign up to unlock insights and begin your AI-powered journey.</p>
+        <form onsubmit="signUp(event)">
+          <label for="name">Full Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            maxlength="60"
+            placeholder="Enter your full name"
+            required
+          />
+
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+          <label for="field_of_study">Field of study:</label>
+          <input
+            type="text"
+            id="field_of_study"
+            name="field_of_study"
+            placeholder=""
+            required
+          />
+
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Create a password"
+            required
+          />
+
+          <label for="confirm-password">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            placeholder="Confirm your password"
+            required
+          />
+
+          <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="/login">Login</a></p>
+        <button class="back-home-btn" onclick="location.href='/'">
+          Back to Home
+        </button>
+      </section>
+    </main>
+  </body>
+  <script src="./signup.js" defer></script>
 </html>
