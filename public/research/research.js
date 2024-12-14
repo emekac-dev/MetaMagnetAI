@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (field) fieldFilter.value = field;
     if (region) regionFilter.value = region;
 
+    if (!topic) location.href = "/dashboard";
+
     let storedData = JSON.parse(localStorage.getItem("researchData"));
     console.log(storedData);
     if (click) {
