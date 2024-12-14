@@ -12,10 +12,14 @@ exports.getUserData = catchAsync(async (req, res) => {
   if (!user) {
     return next(new AppError("User not found", 404));
   }
-  const activities = await Search.find({ user: id });
+  const activities = await Search.find({ user: id }).sort({
+    searchTimestamp: -1,
+  });
 
   // Extract activities and filter out duplicates
-  const uniqueActivities = [...new Set(activities.map((val) => val.activity))];
+  const uniqueActivities = [
+    ...new Set(activities.map((val) => val.activity)),
+  ].slice(0, 5);
   const topicsCount = activities.filter((val) => val.fromClick).length;
 
   res.status(200).json({
