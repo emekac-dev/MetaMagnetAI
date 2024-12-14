@@ -10,3 +10,24 @@ exports.getUserData = catchAsync(async (req, res) => {
     activities: userData.activities,
   });
 });
+
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+};
+
+exports.getUser = catchAsync(async ({ params }, res, next) => {
+  const { id } = params;
+  const user = await User.findOne({ _id: id }).select(
+    "-passwordChangedAt -__v -role"
+  );
+
+  if (!user) {
+    return next(new AppError("User not found", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: user,
+  });
+});

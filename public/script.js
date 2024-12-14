@@ -140,3 +140,16 @@ const findResearchTopicsWithoutForm = async (number = 0) => {
     showErrorMessageWithTimeout("error-message", extractErrorMessage(error), 5);
   }
 };
+
+function markdownToPlainText(md) {
+  return md
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Convert [text](link) to text
+    .replace(/\*\*(.+?)\*\*/g, "$1") // Convert **bold** to plain text
+    .replace(/\*(.+?)\*/g, "$1") // Convert *italic* to plain text
+    .replace(/~~(.+?)~~/g, "$1") // Convert ~~strikethrough~~ to plain text
+    .replace(/`(.+?)`/g, "$1") // Convert `code` to plain text
+    .replace(/#+\s(.+)/g, "$1") // Convert # Heading to plain text
+    .replace(/!\[.*?\]\(.*?\)/g, "") // Remove images
+    .replace(/\n/g, " ") // Replace line breaks with spaces
+    .trim(); // Trim leading/trailing whitespace
+}

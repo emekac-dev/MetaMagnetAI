@@ -34,3 +34,46 @@ exports.findResearchTopics = catchAsync(async (req, res, next) => {
     return next(new AppError("Failed to fetch research topics.", 500));
   }
 });
+
+exports.generateResearchTopics = catchAsync(async (req, res, next) => {
+  const { discipline } = req.query;
+
+  if (!discipline) {
+    return res.status(400).json({ error: "Discipline is required." });
+  }
+  const options = {
+    method: "POST",
+    url: "https://chatgpt-42.p.rapidapi.com/gpt4",
+    headers: {
+      "x-rapidapi-key": process.env["X_RAPID_API_KEY"],
+      "x-rapidapi-host": "chatgpt-42.p.rapidapi.com",
+      "Content-Type": "application/json",
+    },
+    data: {
+      messages: [
+        {
+          role: "user",
+          content: `Generate a list of academic research topics related to the discipline "${discipline}".`,
+        },
+      ],
+      web_access: false,
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+
+    const suggestions = response.data.result
+      .trim()
+      .split("\n")
+      .slice(1)
+      .filter((topic) => topic);
+
+    res.json({ topics: suggestions });
+  } catch (error) {
+    console.log(error);
+    next(
+      new AppError("Failed to generate topics. Please try again later.", 500)
+    );
+  }
+});
