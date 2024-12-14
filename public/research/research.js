@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const year = params.get("y"); // e.g., "2015-2023"
     const field = params.get("f"); // e.g., "Biology"
     const region = params.get("r"); // e.g., "Africa"
+    const click = params.get("c"); // e.g., "Africa"
 
     // Set the values of the input fields
     if (topic) searchBar.value = topic;
@@ -22,7 +23,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (region) regionFilter.value = region;
 
     let storedData = JSON.parse(localStorage.getItem("researchData"));
-
+    console.log(storedData);
+    if (click) {
+      storedData = await findResearchTopicsWithoutForm(0, true);
+    }
     if (
       !storedData ||
       storedData.search_parameters.q !==

@@ -2,9 +2,10 @@ const path = require("path");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 const axios = require("axios");
+const Search = require("../models/searchModel");
 
 exports.findResearchTopics = catchAsync(async (req, res, next) => {
-  const { topic, year, field, region, start } = req.body;
+  const { topic, year, field, region, start, fromClick } = req.body;
 
   if (!topic) {
     return next(new AppError("Topic is required.", 400));
@@ -20,16 +21,31 @@ exports.findResearchTopics = catchAsync(async (req, res, next) => {
     q: topic + `${field ? " in " + field : ""}`,
     as_ylo: year ? year.split("-")[0] : undefined,
     as_yhi: year ? year.split("-")[1] : undefined,
-    hl: "en", // Default to English if no region provided
-    api_key: process.env.SERP_API_PRIVATE_KEY, // Store API key in .env
+    hl: "en",
+    api_key: process.env.SERP_API_PRIVATE_KEY,
     start: start || 0,
   };
 
   try {
     const response = await axios.get("https://serpapi.com/search", { params });
 
-    // Return data to the frontend
-    res.status(200).json(response.data);
+    // Save search data to MongoDB, associating it with the logged-in user
+    const search = await Search.create({
+      topic,
+      year,
+      field,
+      region,
+      activity,
+      fromClick: fromClick || false,
+      responseData: response.data,
+      user: req.user.id, // Assuming req.user contains the authenticated user's details
+    });
+
+    // Return response to the frontend
+    res.status(200).json({
+      status: "success",
+      data: response.data,
+    });
   } catch (error) {
     return next(new AppError("Failed to fetch research topics.", 500));
   }

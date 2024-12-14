@@ -1,13 +1,32 @@
 const userData = require("../dev-data/userData.json");
+const Search = require("../models/searchModel");
+const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getUserData = catchAsync(async (req, res) => {
-  return res.json({
-    name: userData.name,
-    topicsCount: userData.topicsCount,
-    reportsCount: userData.reportsCount,
-    trendsCount: userData.trendsCount,
-    activities: userData.activities,
+  const { params } = req;
+  const { id } = params;
+  const user = await User.findOne({ _id: id }).select(
+    "-passwordChangedAt -__v -role"
+  );
+  if (!user) {
+    return next(new AppError("User not found", 404));
+  }
+  const activities = await Search.find({ user: id });
+
+  // Extract activities and filter out duplicates
+  const uniqueActivities = [...new Set(activities.map((val) => val.activity))];
+  const topicsCount = activities.filter((val) => val.fromClick).length;
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      name: user.firstName + " " + user.lastName,
+      topicsCount: topicsCount,
+      reportsCount: 0,
+      trendsCount: 0,
+      activities: uniqueActivities,
+    },
   });
 });
 
