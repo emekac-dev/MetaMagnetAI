@@ -85,7 +85,7 @@ const findResearchTopics = async (e) => {
       }
     }
     const res = await axios.post("/api/research/search", data);
-    localStorage.setItem("researchData", JSON.stringify(res.data));
+    localStorage.setItem("researchData", JSON.stringify(res.data.data));
     location.href = `/research?t=${encodeURIComponent(
       searchBar.value
     )}&y=${encodeURIComponent(yearFilter.value)}&f=${encodeURIComponent(
@@ -96,7 +96,7 @@ const findResearchTopics = async (e) => {
   }
 };
 
-const findResearchTopicsWithoutForm = async (number = 0) => {
+const findResearchTopicsWithoutForm = async (number = 0, click = false) => {
   // Extract values from input fields using their names or IDs
   const searchBar = document.querySelector("#search-bar");
   const yearFilter = document.querySelector("#year-filter");
@@ -110,6 +110,7 @@ const findResearchTopicsWithoutForm = async (number = 0) => {
     field: fieldFilter.value,
     region: regionFilter.value,
     start: number,
+    fromClick: true,
   };
 
   try {
@@ -129,13 +130,13 @@ const findResearchTopicsWithoutForm = async (number = 0) => {
       }
     }
     const res = await axios.post("/api/research/search", data);
-    localStorage.setItem("researchData", JSON.stringify(res.data));
+    localStorage.setItem("researchData", JSON.stringify(res.data.data));
     location.href = `/research?t=${encodeURIComponent(
       searchBar.value
     )}&y=${encodeURIComponent(yearFilter.value)}&f=${encodeURIComponent(
       fieldFilter.value
     )}&r=${encodeURIComponent(regionFilter.value)}`;
-    return res.data;
+    return res.data.data;
   } catch (error) {
     showErrorMessageWithTimeout("error-message", extractErrorMessage(error), 5);
   }

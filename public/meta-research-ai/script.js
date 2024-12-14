@@ -30,7 +30,7 @@ document.getElementById("suggest-button").addEventListener("click", () => {
             ev.preventDefault();
             location.href = `/research?t=${encodeURIComponent(
               markdownToPlainText(topic)
-            )}`;
+            )}&c=clicked`;
           });
         });
       } else {

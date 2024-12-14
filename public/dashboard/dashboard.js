@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Fetch data using Axios
     const response = await axios.get("/api/dashboard");
-    const data = response.data;
+    const data = response.data.data;
 
     // Populate dashboard elements if they exist
     if (document.querySelector("#user-name")) {
@@ -20,9 +20,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Populate recent activities
     const activityLog = document.getElementById("activity-log");
+    activityLog.innerHTML = "";
     if (activityLog && Array.isArray(data.activities)) {
       data.activities.forEach((activity) => {
         const listItem = document.createElement("li");
+        listItem.className = "cursor-pointer";
         listItem.innerText = activity;
         activityLog.appendChild(listItem);
       });
@@ -32,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Show an error message to the user
     showErrorMessageWithTimeout(
       "error-message",
-      "Failed to load dashboard data. Please try again later.",
+      extractErrorMessage(error),
       5000
     );
   }

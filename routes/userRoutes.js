@@ -11,6 +11,6 @@ const router = express.Router();
 
 router.use(protect);
 router.get("/me", getMe, getUser);
-router.get("/", getUserData);
+router.get("/", getMe, getUserData);
 
 module.exports = router;
