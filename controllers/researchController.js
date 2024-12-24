@@ -69,7 +69,7 @@ exports.generateResearchTopics = catchAsync(async (req, res, next) => {
       messages: [
         {
           role: "user",
-          content: `Generate a list of academic research topics related to the discipline "${discipline}".`,
+          content: `Generate a list of Masters academic research topics related to the discipline "${discipline}".`,
         },
       ],
       web_access: false,
