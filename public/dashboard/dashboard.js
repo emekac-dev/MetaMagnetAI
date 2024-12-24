@@ -4,10 +4,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const response = await axios.get("/api/dashboard");
     const data = response.data.data;
 
-    // Populate dashboard elements if they exist
-    if (document.querySelector("#user-name")) {
-      document.getElementById("user-name").innerText = data.name;
-    }
     if (document.getElementById("topics-count")) {
       document.getElementById("topics-count").innerText = data.topicsCount;
     }
